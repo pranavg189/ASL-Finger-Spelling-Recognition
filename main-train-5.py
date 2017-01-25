@@ -13,6 +13,7 @@
 # trial tests (incrementally increasing )
 # batch size : 1, number of classes : 5, 50 neurons in Dense layer - works
 # batch size : 5, number of classes : 5, 50 neurons in Dense layer - works
+# batch size : 10, number of classes : 5, 50 neurons in Dense layer - works (approximately 3.5 GB Ram Usage)
 
 # import cv2
 import numpy
@@ -36,7 +37,7 @@ y_train = []
 nb_classes = 5  # number of classes (default: 36)
 img_rows, img_cols = 400, 400  # size of training images
 img_channels = 3  # BGR channels
-batch_size = 5 # batch size (default: 32)
+batch_size = 10 # batch size (default: 32)
 nb_epoch = 25  # iterations for training (default: 100)
 data_augmentation = True
 
