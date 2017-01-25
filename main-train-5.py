@@ -8,6 +8,8 @@
 
 # so i have decreased the neurons in the Dense layer to 50
 
+## added support for checkpointing the model
+
 # trial tests (incrementally increasing )
 # batch size : 1, number of classes : 5, 50 neurons in Dense layer - works
 # batch size : 5, number of classes : 5, 50 neurons in Dense layer - works
@@ -22,6 +24,7 @@ from keras.models import Sequential
 from keras.layers.core import Dense, Activation, Flatten
 from keras.layers.convolutional import Convolution2D, MaxPooling2D
 from keras.utils import np_utils
+from keras.callbacks import ModelCheckpoint
 # from PIL import Image
 import keras
 
@@ -132,9 +135,18 @@ def train_model(model, X_train, Y_train):
                   optimizer=sgd,
                   metrics=['accuracy'])
 
+    '''
+    saves the model weights after each epoch if the validation loss decreased
+    '''
+    checkpointer = ModelCheckpoint(filepath="/home/pranav/Development/Final-year-project/ASL-Finger-Spelling-Recognition-master/weights.{epoch:02d}.hdf5",
+                                   verbose=0,
+                                   save_best_only=False,
+                                   period=1)
+
     model.fit(X_train, Y_train,
               batch_size=batch_size,
-              nb_epoch=nb_epoch)
+              nb_epoch=nb_epoch
+              callbacks=[checkpointer])
 
 
 # loads data set, converts the triaining arrays into required formats of numpy arrays and calls make_network to
