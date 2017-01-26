@@ -18,6 +18,8 @@
 
 # IMPORTANT: Close all other programs before running this script as it requires a lot of RAM
 
+# TODO: try increasing the validation split to 20 percent and 30 percent
+
 # import cv2
 import numpy
 import math
