@@ -18,6 +18,8 @@
 # batch size : 5, number of classes : 5, 50 neurons in Dense layer - works
 # batch size : 10, number of classes : 5, 50 neurons in Dense layer - works (approximately 3.5 GB Ram Usage)
 
+# IMPORTANT: Ensure that while resuming the training, the batch size is same as the value set in train-5.py.
+
 # import cv2
 import numpy
 import math
@@ -40,7 +42,7 @@ y_train = []
 nb_classes = 5  # number of classes (default: 36)
 img_rows, img_cols = 400, 400  # size of training images
 img_channels = 3  # BGR channels
-batch_size = 10 # batch size (default: 32)
+batch_size = 15 # batch size (default: 32)
 nb_epoch = 25  # iterations for training (default: 100)
 data_augmentation = True
 last_epoch=5   # the number of last epoch which was completed successfully
@@ -124,7 +126,7 @@ def make_network(x_train):
     model.add(MaxPooling2D(pool_size=(2, 2)))
 
     model.add(Flatten())
-    model.add(Dense(50))
+    model.add(Dense(128))
     model.add(Activation('relu'))
     model.add(Dense(nb_classes))
     model.add(Activation('softmax'))

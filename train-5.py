@@ -10,10 +10,13 @@
 
 ## added support for checkpointing the model
 
-# trial tests (incrementally increasing )
+# trial tests (incrementally increase batch size, number of classes and dense layer neurons until memory runs out)
 # batch size : 1, number of classes : 5, 50 neurons in Dense layer - works
 # batch size : 5, number of classes : 5, 50 neurons in Dense layer - works
 # batch size : 10, number of classes : 5, 50 neurons in Dense layer - works (approximately 3.5 GB Ram Usage)
+# batch size : 15, number of classes : 5, 128 neurons in Dense layer - works (with validation_split = 0.1)
+
+# IMPORTANT: Close all other programs before running this script as it requires a lot of RAM
 
 # import cv2
 import numpy
@@ -37,7 +40,7 @@ y_train = []
 nb_classes = 5  # number of classes (default: 36)
 img_rows, img_cols = 400, 400  # size of training images
 img_channels = 3  # BGR channels
-batch_size = 10 # batch size (default: 32)
+batch_size = 15 # batch size (default: 32)
 nb_epoch = 25  # iterations for training (default: 100)
 data_augmentation = True
 
@@ -120,7 +123,7 @@ def make_network(x_train):
     model.add(MaxPooling2D(pool_size=(2, 2)))
 
     model.add(Flatten())
-    model.add(Dense(50))
+    model.add(Dense(128))
     model.add(Activation('relu'))
     model.add(Dense(nb_classes))
     model.add(Activation('softmax'))
