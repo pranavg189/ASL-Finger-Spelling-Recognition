@@ -147,10 +147,14 @@ def train_model(model, X_train, Y_train):
                                    save_best_only=False,
                                    period=1)
 
-    model.fit(X_train, Y_train,
-              batch_size=batch_size,
-              nb_epoch=nb_epoch
-              callbacks=[checkpointer])
+    hist = model.fit(X_train, Y_train,          #default validation split is 0.0
+                     batch_size=batch_size,
+                     nb_epoch=nb_epoch,
+                     callbacks=[checkpointer],
+                     shuffle=True, # shuffle training data in each successive epoch
+                     validation_split=0.1) # use 10 percent of training data for validation
+
+    print(hist.history) # get training/validation accuracy
 
 
 # loads data set, converts the triaining arrays into required formats of numpy arrays and calls make_network to
